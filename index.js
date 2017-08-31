@@ -28,7 +28,7 @@ function generatePayload (target, options) {
   const join = (xs) => xs.filter(x => x).join('')
   const formatTarget = (id) => (
     '0000000000000' +
-    '0812345678'
+    id
       .replace(/-/g, '')
       .replace(/^0/, '66')
   ).slice(-13)
