@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const qr = require('qrcode-terminal')
 const argv = require('minimist')(process.argv.slice(2), { string: '_' })
 const generatePayload = require('./')

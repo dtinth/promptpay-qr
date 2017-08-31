@@ -8,6 +8,9 @@
     "standard": "^10.0.3"
   },
   "name": "promptpay-qr",
+  "bin": {
+    "promptpay-qr": "./cli.js"
+  },
   "version": "0.0.1",
   "description": "Library to generate PromptPay payload and CLI script to generate QR code",
   "main": "index.js",
@@ -15,5 +18,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Thai Pangsakulyanont <org.yi.dttvb@gmail.com> (http://dt.in.th/)",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dtinth/promptpay-qr.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dtinth/promptpay-qr/issues"
+  },
+  "homepage": "https://github.com/dtinth/promptpay-qr#readme"
 }
