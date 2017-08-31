@@ -9,7 +9,7 @@ if (!/^(0|66)\d{9}|\d{13}$/.test(target)) {
   process.exit(1)
 }
 
-const payload = generatePayload(target, { amount: +argv._[1] })
+const payload = generatePayload(target, { amount: +argv.amount || +argv._[1] })
 console.log(payload)
 
 qr.generate(payload, { small: !!argv.small })
