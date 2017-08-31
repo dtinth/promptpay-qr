@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "crc": "^3.4.4",
+    "minimist": "^1.2.0",
+    "qrcode-terminal": "^0.11.0"
+  },
+  "devDependencies": {
+    "standard": "^10.0.3"
+  },
+  "name": "promptpay-qr",
+  "version": "0.0.1",
+  "description": "Library to generate PromptPay payload and CLI script to generate QR code",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Thai Pangsakulyanont <org.yi.dttvb@gmail.com> (http://dt.in.th/)",
+  "license": "MIT"
+}
