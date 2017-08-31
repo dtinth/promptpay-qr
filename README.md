@@ -20,6 +20,8 @@ QR code will be printed in the terminal
 generatePayload(idOrPhoneNo, { amount })
 ```
 
+Returns a string which should be rendered as a QR code.
+
 ## References
 
 - https://www.blognone.com/node/95133
