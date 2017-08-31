@@ -1,6 +1,6 @@
 // Refs:
 // - https://www.blognone.com/node/95133
-// - EMV QRCPS Merchant-Presented Mode Requirements
+// - Ehttps://www.emvco.com/emv-technologies/qrcodes/
 
 const crc = require('crc')
 

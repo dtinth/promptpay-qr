@@ -19,3 +19,8 @@ QR code will be printed in the terminal
 ```
 generatePayload(idOrPhoneNo, { amount })
 ```
+
+## References
+
+- https://www.blognone.com/node/95133
+- https://www.emvco.com/emv-technologies/qrcodes/
