@@ -2,7 +2,7 @@
 const qr = require('qrcode-terminal')
 const argv = require('minimist')(process.argv.slice(2), { string: '_' })
 const generatePayload = require('./')
-const target = argv._[0].replace(/-/g, '')
+const target = String(argv._[0]).replace(/-/g, '')
 
 if (!/^(0|66)\d{9}|\d{13}$/.test(target)) {
   console.error('Invalid recipient given: expected tax id or phone number')
