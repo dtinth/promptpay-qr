@@ -45,7 +45,7 @@ function f (id, value) {
 }
 
 function join (xs) {
-  return xs.filter(x => x).join('')
+  return xs.filter(function (x) { return x }).join('')
 }
 
 function formatTarget (id) {
