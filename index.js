@@ -23,6 +23,8 @@ var TRANSACTION_CURRENCY_THB = '764'
 var COUNTRY_CODE_TH = 'TH'
 
 function generatePayload (target, options) {
+  target = sanitizeTarget(target)
+
   var amount = options.amount
   var targetType = target.length >= 13 ? BOT_ID_MERCHANT_TAX_ID : BOT_ID_MERCHANT_PHONE_NUMBER
 
@@ -50,8 +52,12 @@ function serialize (xs) {
   return xs.filter(function (x) { return x }).join('')
 }
 
+function sanitizeTarget (id) {
+  return id.replace(/[^0-9]/g, '')
+}
+
 function formatTarget (id) {
-  return ('0000000000000' + id.replace(/-/g, '').replace(/^0/, '66')).slice(-13)
+  return ('0000000000000' + sanitizeTarget(id).replace(/^0/, '66')).slice(-13)
 }
 
 function formatAmount (amount) {
