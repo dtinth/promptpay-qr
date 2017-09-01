@@ -29,7 +29,7 @@ function generatePayload (target, options) {
   var data = [
     f(ID_PAYLOAD_FORMAT, PAYLOAD_FORMAT_EMV_QRCPS_MERCHANT_PRESENTED_MODE),
     f(ID_POI_METHOD, amount ? POI_METHOD_DYNAMIC : POI_METHOD_STATIC),
-    f(ID_MERCHANT_INFORMATION_BOT, join([
+    f(ID_MERCHANT_INFORMATION_BOT, serialize([
       f(MERCHANT_INFORMATION_TEMPLATE_ID_GUID, GUID_PROMPTPAY),
       f(targetType, formatTarget(target))
     ])),
@@ -37,16 +37,16 @@ function generatePayload (target, options) {
     f(ID_TRANSACTION_CURRENCY, TRANSACTION_CURRENCY_THB),
     amount && f(ID_TRANSACTION_AMOUNT, formatAmount(amount))
   ]
-  var dataToCrc = join(data) + ID_CRC + '04'
+  var dataToCrc = serialize(data) + ID_CRC + '04'
   data.push(f(ID_CRC, formatCrc(crc.crc16xmodem(dataToCrc, 0xffff))))
-  return join(data)
+  return serialize(data)
 }
 
 function f (id, value) {
   return [ id, ('00' + value.length).slice(-2), value ].join('')
 }
 
-function join (xs) {
+function serialize (xs) {
   return xs.filter(function (x) { return x }).join('')
 }
 
