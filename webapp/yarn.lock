@@ -5183,9 +5183,9 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-promptpay-qr@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/promptpay-qr/-/promptpay-qr-0.2.0.tgz#3f4ed85edaa4783747897bd81537728dbf364571"
+promptpay-qr@0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/promptpay-qr/-/promptpay-qr-0.3.0.tgz#10d7488b7d0936bbab0efddaf96e60c00e817eba"
   dependencies:
     crc "^3.4.4"
     minimist "^1.2.0"

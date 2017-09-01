@@ -3,13 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "promptpay-qr": "^0.2.0",
+    "promptpay-qr": "0.3.0",
     "qrcode": "^0.9.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-scripts": "1.0.12"
   },
-  "standard": { "parser": "babel-eslint" },
+  "standard": {
+    "parser": "babel-eslint"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
