@@ -64,7 +64,7 @@ class App extends Component {
         <div className='qr' onClick={this.onSet}>
           {this.renderQR()}
         </div>
-        <div className='amount'>
+        <form className='amount' onSubmit={e => { e.preventDefault() }}>
           <input
             className='amount'
             type='number'
@@ -76,7 +76,7 @@ class App extends Component {
             autoFocus
           />
           {' THB'}
-        </div>
+        </form>
         <div className='tip'>
           <strong>Tip: </strong>Add to home screen for easier access
           <br />
