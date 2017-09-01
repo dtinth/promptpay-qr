@@ -4,6 +4,10 @@
     "minimist": "^1.2.0",
     "qrcode": "^0.9.0"
   },
+  "files": [
+    "index.js",
+    "cli.js"
+  ],
   "devDependencies": {
     "standard": "^10.0.3"
   },
