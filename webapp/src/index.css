@@ -57,3 +57,14 @@ body {
   margin: 20px 0;
   color: #8b8685;
 }
+
+.tip a {
+  color: #9b9695;
+  text-decoration: none;
+}
+
+h1 {
+  margin: 20px 0;
+  font-size: 32px;
+  color: #8b8685;
+}

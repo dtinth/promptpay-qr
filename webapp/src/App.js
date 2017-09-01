@@ -79,6 +79,8 @@ class App extends Component {
         </div>
         <div className='tip'>
           <strong>Tip: </strong>Add to home screen for easier access
+          <br />
+          Powered by <a href='https://github.com/dtinth/promptpay-qr' target='_blank'>promptpay-qr</a>
         </div>
       </div>
     )
