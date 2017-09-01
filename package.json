@@ -15,7 +15,7 @@
   "bin": {
     "promptpay-qr": "./cli.js"
   },
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Library to generate PromptPay payload and CLI script to generate QR code",
   "main": "index.js",
   "scripts": {
