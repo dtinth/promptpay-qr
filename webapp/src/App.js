@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import generatePayload from 'promptpay-qr'
 import qr from 'qrcode'
 
+const ver = require('promptpay-qr/package.json').version
+
 class QRCode extends Component {
   state = { svg: '' }
   componentDidMount () {
@@ -80,7 +82,7 @@ class App extends Component {
         <div className='tip'>
           <strong>Tip: </strong>Add to home screen for easier access
           <br />
-          Powered by <a href='https://github.com/dtinth/promptpay-qr' target='_blank'>promptpay-qr</a>
+          Powered by <a href='https://github.com/dtinth/promptpay-qr' target='_blank'>promptpay-qr</a>@{ver}
         </div>
       </div>
     )
