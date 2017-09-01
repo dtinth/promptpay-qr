@@ -5,8 +5,9 @@ Web app, CLI app, and library to generate QR Code payload for PromptPay.
 ## CLI
 
 ```
-npx promptpay-qr 081-xxx-xxxx
-npx promptpay-qr 1-xxxx-xxxxx-xx-x --amount 4.22
+npm install -g promptpay-qr
+promptpay-qr 081-xxx-xxxx
+promptpay-qr 1-xxxx-xxxxx-xx-x --amount 4.22
 ```
 
 QR code will be printed in the terminal
