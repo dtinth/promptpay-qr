@@ -1,0 +1,8 @@
+{
+  "short_name": "promptpay-qr",
+  "name": "promptpay-qr",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#090807",
+  "background_color": "#353433"
+}
