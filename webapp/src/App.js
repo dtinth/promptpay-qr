@@ -38,7 +38,7 @@ class App extends Component {
     amount: 0
   }
   onSet = () => {
-    const id = window.prompt('Your PromptPay ID')
+    const id = window.prompt('Your PromptPay ID', this.state.id)
     if (id != null) {
       this.setState({ id })
       window.localStorage.promptpayID = id
