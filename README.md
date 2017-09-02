@@ -70,9 +70,11 @@ Then QR code will be printed in the terminal.
 
 ## API
 
-**[`promptpay-qr` is available on npm](https://www.npmjs.com/package/promptpay-qr).**
-You can use this library to in your JavaScript app to generate a PromptPay QR code.
-[See code example](https://runkit.com/dtinth/promptpay-qr).
+- **[`promptpay-qr` is available on npm](https://www.npmjs.com/package/promptpay-qr).**
+
+- You can use this library to in your JavaScript app to generate a PromptPay QR code.
+
+- [See code example](https://runkit.com/dtinth/promptpay-qr).
 
 ```
 generatePayload(idOrPhoneNo, { amount })
