@@ -1,6 +1,6 @@
 # promptpay-qr [![npm version](https://badge.fury.io/js/promptpay-qr.svg)](https://badge.fury.io/js/promptpay-qr)
 
-Web app, command line app, and library to generate QR Code payload for PromptPay.
+[Mobile web app](#mobile-web-app), [command line app](#cli), and [JavaScript library](#api) to generate QR Code payload for PromptPay.
 
 
 ## Introduction
@@ -41,7 +41,7 @@ Features:
 
 - The app remembers your PromptPay ID, so you don’t have to enter the information each time.
 
-- It is a **Progressive Web App**, so you can add to home screen and it will work offline (Android).
+- It is a [**Progressive Web App**](https://developers.google.com/web/progressive-web-apps/), so you can add to home screen and it will work offline (Android).
 
 
 ## CLI
