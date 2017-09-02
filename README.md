@@ -22,7 +22,7 @@ By generating a QR code, users of mobile banking apps can scan your QR code, and
 
 **You can quickly receive money from your home screen.**
 
-<img src="images/mobile.png" width="324" height="451" align="right" />
+<img src="images/mobile.png" width="324" align="right" />
 
 For example, if you want to collect 80 Baht from each friend, you can open the app, type in 80, and show the QR code.
 [It takes less than 5 seconds](https://www.facebook.com/dtinth/videos/10208543817227100/).
@@ -49,7 +49,7 @@ Features:
 **You can receive money from your terminal.**
 
 <p align="center">
-  <img src="images/terminal.png" width="400" height="495" />
+  <img src="images/terminal.png" width="400" />
 </p>
 
 Install Node.js and run this command to install `promptpay-qr` in your machine:
