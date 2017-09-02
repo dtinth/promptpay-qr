@@ -18,6 +18,16 @@ By generating a QR code, users of mobile banking apps can scan your QR code, and
 - [**`promptpay-qr` JavaScript API**](#api) — Generate a PromptPay QR code programmatically.
 
 
+### What’s in a QR code
+
+> ⚠️ Read this section to understand privacy implications of using PromptPay QR code ⚠️
+
+- The PromptPay QR code is based on [EMV QRCPS Merchant Presented Mode](https://www.emvco.com/emv-technologies/qrcodes/) specification.
+
+- **The QR code contains the PromptPay ID.** This means anyone who sees the QR code can find out your PromptPay ID (Phone number or National ID number).
+
+- The QR code can optionally contain the transfer amount. Mobile banking apps use this number to pre-fill the amount for convenience.
+
 ## Mobile web app
 
 **You can quickly receive money from your home screen.**
