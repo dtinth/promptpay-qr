@@ -66,9 +66,10 @@ class App extends Component {
         <span>Tap above to get started</span>
       )
     } else {
-      const thing = this.state.id.replace(/[^0-9]/g, '').length >= 13 ? 'ID' : 'phone number'
+      const id = this.state.id.replace(/[^0-9]/g, '')
+      const thing = id.length >= 13 ? 'ID' : 'phone number'
       return (
-        <span>QR code contains your {thing}: <span style={{ color: '#bef' }}>{this.state.id}</span></span>
+        <span>QR code contains your {thing}: <span style={{ color: '#bef' }}>{id}</span></span>
       )
     }
   }
