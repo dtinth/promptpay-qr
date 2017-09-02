@@ -60,11 +60,26 @@ class App extends Component {
       )
     }
   }
+  renderExplanation () {
+    if (!this.state.id) {
+      return (
+        <span>Tap above to get started</span>
+      )
+    } else {
+      const thing = this.state.id.replace(/[^0-9]/g, '').length >= 13 ? 'ID' : 'phone number'
+      return (
+        <span>QR code contains your {thing}: {this.state.id}</span>
+      )
+    }
+  }
   render () {
     return (
       <div className='App'>
         <div className='qr' onClick={this.onSet}>
           {this.renderQR()}
+        </div>
+        <div className='qr-explanation'>
+          {this.renderExplanation()}
         </div>
         <form className='amount' onSubmit={e => { e.preventDefault() }}>
           <input
