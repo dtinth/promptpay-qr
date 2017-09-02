@@ -1,4 +1,4 @@
-# promptpay-qr
+# promptpay-qr [![npm version](https://badge.fury.io/js/promptpay-qr.svg)](https://badge.fury.io/js/promptpay-qr)
 
 Web app, command line app, and library to generate QR Code payload for PromptPay.
 
