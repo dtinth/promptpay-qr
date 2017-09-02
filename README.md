@@ -5,11 +5,11 @@ Web app, command line app, and library to generate QR Code payload for PromptPay
 
 ## Introduction
 
-The Bank of Thailand [introduced a **PromptPay QRCode Standard**](https://thestandard.co/standardqrcode/).
+The Bank of Thailand [introduced a **PromptPay QRCode Standard**](https://thestandard.co/standardqrcode/) that works with most mobile banking apps in Thailand.
 
-By generating a QR code, users of mobile banking apps in Thailand can scan the QR code, and transfer money to your PromptPay account instantly.
+By generating a QR code, users of mobile banking apps can scan your QR code, and transfer money to your PromptPay account instantly.
 
-**Contents:**
+**In this repository:**
 
 - [**Mobile app**](#mobile-web-app) — Receive money from your home screen.
 
