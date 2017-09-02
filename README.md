@@ -97,3 +97,10 @@ Returns a string which should be rendered as a QR code.
 
 - https://www.blognone.com/node/95133
 - https://www.emvco.com/emv-technologies/qrcodes/
+
+
+## Implementation in other languages
+
+These libraries are written by other developers:
+
+- PHP: [kittinan/php-promptpay-qr](https://github.com/kittinan/php-promptpay-qr)
