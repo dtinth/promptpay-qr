@@ -49,7 +49,7 @@ Features:
 **You can receive money from your terminal.**
 
 <p align="center">
-  <img src="images/terminal.png" width="382" height="495" />
+  <img src="images/terminal.png" width="400" height="495" />
 </p>
 
 Install Node.js and run this command to install `promptpay-qr` in your machine:
