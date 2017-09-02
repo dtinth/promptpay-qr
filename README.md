@@ -24,7 +24,7 @@ By generating a QR code, users of mobile banking apps can scan your QR code, and
 
 - The PromptPay QR code is based on [EMV QRCPS Merchant Presented Mode](https://www.emvco.com/emv-technologies/qrcodes/) specification.
 
-- **The QR code contains the PromptPay ID.** This means anyone who sees the QR code can find out your PromptPay ID (Phone number or National ID number).
+- **The QR code contains the PromptPay ID.** This means anyone who sees the QR code can find out your PromptPay ID (Phone number, National ID number). Please treat the QR code like your personal information.
 
 - The QR code can optionally contain the transfer amount. Mobile banking apps use this number to pre-fill the amount for convenience.
 
@@ -52,6 +52,8 @@ Features:
 - The app remembers your PromptPay ID, so you don’t have to enter the information each time.
 
 - It is a [**Progressive Web App**](https://developers.google.com/web/progressive-web-apps/), so you can add to home screen and it will work offline (Android).
+
+- No personal data is sent to any server. Your PromptPay ID stays in your phone/computer.
 
 
 ## CLI
