@@ -1,6 +1,14 @@
-// Refs:
-// - https://www.blognone.com/node/95133
-// - Ehttps://www.emvco.com/emv-technologies/qrcodes/
+/*!
+ * promptpay-qr
+ * JavaScript library to generate PromptPay QR code
+ * <https://github.com/dtinth/promptpay-qr>
+ * 
+ * Refs:
+ * - https://www.blognone.com/node/95133
+ * - Ehttps://www.emvco.com/emv-technologies/qrcodes/
+ *
+ * @license MIT
+ */
 
 var crc = require('crc')
 
