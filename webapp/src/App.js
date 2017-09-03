@@ -40,7 +40,7 @@ class App extends Component {
     amount: 0
   }
   onSet = () => {
-    const id = window.prompt('Your PromptPay ID', this.state.id)
+    const id = window.prompt('Your phone number', this.state.id)
     if (id != null) {
       this.setState({ id })
       window.localStorage.promptpayID = id
@@ -50,7 +50,7 @@ class App extends Component {
     if (!this.state.id) {
       return (
         <div className='err'>
-          <span>Tap to set PromptPay ID</span>
+          {t('กดที่นี่เพื่อตั้งค่าเบอร์โทรศัพท์', 'Tap to set PromptPay ID')}
         </div>
       )
     } else {
@@ -63,13 +63,18 @@ class App extends Component {
   renderExplanation () {
     if (!this.state.id) {
       return (
-        <span>Tap above to get started</span>
+        <span>{t('กดที่กล่องข้างบน เพื่อใส่เบอร์โทรศัพท์ที่ใช้รับเงิน', 'Tap above to get started')}</span>
       )
     } else {
       const id = this.state.id.replace(/[^0-9]/g, '')
-      const thing = id.length >= 13 ? 'ID' : 'phone number'
       return (
-        <span>QR code contains your {thing}: <span style={{ color: '#bef' }}>{id}</span></span>
+        <span>
+          {id.length >= 13 ? (
+            t('QR code มีเลขประจำตัวของคุณ', 'QR code contains your ID')
+          ) : (
+            t('QR code มีเบอร์โทรศัพท์ของคุณ', 'QR code contains your phone number')
+          )}
+          : <span style={{ color: '#bef' }}>{id}</span></span>
       )
     }
   }
@@ -93,7 +98,8 @@ class App extends Component {
             }}
             autoFocus
           />
-          {' THB'}
+          {' '}
+          {t('บาท', 'THB')}
         </form>
         <div className='tip'>
           <strong>Tip: </strong>Add to home screen for easier access
@@ -103,6 +109,10 @@ class App extends Component {
       </div>
     )
   }
+}
+
+function t (th, en) {
+  return <span title={th}>{en}</span>
 }
 
 export default App
