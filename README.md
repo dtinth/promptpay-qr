@@ -41,7 +41,7 @@ To use it:
 
 1. Open **Chrome** (on Android) or **Safari** (iOS).
 
-2. Go to **https://promptpay-qr.firebaseapp.com/**.
+2. Go to **https://promptpay2.me/**.
 
 3. Set your PromptPay ID.
 
@@ -119,4 +119,3 @@ These libraries are written by other developers:
 > LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 > OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 > SOFTWARE.
-
