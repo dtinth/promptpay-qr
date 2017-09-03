@@ -1,8 +1,8 @@
 {
-  "short_name": "promptpay-qr",
-  "name": "promptpay-qr",
+  "short_name": "promptpay2.me",
+  "name": "promptpay2.me",
   "start_url": "./index.html",
-  "icons": [ { "src": "/icon.png", "type": "image/png", "sizes": "144x144" } ],
+  "icons": [ { "src": "/icon.png", "type": "image/png", "sizes": "144x144x" } ],
   "display": "standalone",
   "theme_color": "#090807",
   "background_color": "#353433"
