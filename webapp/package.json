@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "promptpay-qr": "0.4.1",
+    "promptpay-qr": "0.4.2",
     "qrcode": "^0.9.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
