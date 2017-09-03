@@ -10,8 +10,11 @@ body {
 }
 
 .loading {
-  padding: 60px 0;
   color: #8b8685;
+}
+
+.loading p {
+  margin: 30px 0;
 }
 
 .qr {
