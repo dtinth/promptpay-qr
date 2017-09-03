@@ -1,5 +1,5 @@
 {
-  "short_name": "promptpay2.me",
+  "short_name": "promptpay-qr",
   "name": "promptpay2.me",
   "start_url": "./index.html",
   "icons": [ { "src": "/icon.png", "type": "image/png", "sizes": "144x144x" } ],
