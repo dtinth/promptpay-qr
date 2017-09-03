@@ -112,6 +112,9 @@ class App extends Component {
 }
 
 function t (th, en) {
+  if (window.location.hostname === 'promptpay2.me' || window.location.hostname === 'dev.promptpay2.me') {
+    return <span title={en}>{th}</span>
+  }
   return <span title={th}>{en}</span>
 }
 
