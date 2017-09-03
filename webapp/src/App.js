@@ -74,7 +74,8 @@ class App extends Component {
           ) : (
             t('QR code มีเบอร์โทรศัพท์ของคุณ', 'QR code contains your phone number')
           )}
-          : <span style={{ color: '#bef' }}>{id}</span></span>
+          : <strong onClick={this.onSet} style={{ color: '#bef', cursor: 'pointer' }}>{id}</strong>
+        </span>
       )
     }
   }
