@@ -8,7 +8,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'prompypay-browser.min.js'
+    filename: 'promptypay-browser.min.js'
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
