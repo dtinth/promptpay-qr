@@ -65,7 +65,7 @@ function sanitizeTarget (id) {
 }
 
 function formatTarget (id) {
-  return ('0000000000000' + sanitizeTarget(id).replace(/^0/, '66')).slice(-13)
+    return id.length >= 13 ? sanitizeTarget(id) : ('0000000000000' + sanitizeTarget(id).replace(/^0/, '66')).slice(-13)
 }
 
 function formatAmount (amount) {
