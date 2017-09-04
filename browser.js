@@ -1,3 +1,2 @@
 var generatePayload = require('./src/generatedPayload')
-
-module.exports = generatePayload
+window.generatePayload = generatePayload
