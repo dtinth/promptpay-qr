@@ -2,6 +2,8 @@
 
 [Mobile web app](#mobile-web-app), [command line app](#cli), and [JavaScript library](#api) to generate QR Code payload for PromptPay.
 
+:ambulance: **Please upgrade to 0.4.3 ASAP.** Previous versions does not work correctly with Tax IDs. :ambulance:
+
 
 ## Introduction
 
