@@ -2,7 +2,9 @@
   "dependencies": {
     "crc": "^3.4.4",
     "minimist": "^1.2.0",
-    "qrcode": "^0.9.0"
+    "qrcode": "^0.9.0",
+    "unminified-webpack-plugin": "^1.2.0",
+    "webpack": "^3.5.5"
   },
   "files": [
     "index.js",
