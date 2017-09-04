@@ -9,6 +9,7 @@
     "cli.js"
   ],
   "devDependencies": {
+    "jest": "^20.0.4",
     "standard": "^10.0.3"
   },
   "name": "promptpay-qr",
@@ -19,7 +20,7 @@
   "description": "Library to generate PromptPay payload and CLI script to generate QR code",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "Thai Pangsakulyanont <org.yi.dttvb@gmail.com> (http://dt.in.th/)",
   "license": "MIT",
