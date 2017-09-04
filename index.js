@@ -2,7 +2,7 @@
  * promptpay-qr
  * JavaScript library to generate PromptPay QR code
  * <https://github.com/dtinth/promptpay-qr>
- * 
+ *
  * Refs:
  * - https://www.blognone.com/node/95133
  * - Ehttps://www.emvco.com/emv-technologies/qrcodes/
@@ -65,7 +65,9 @@ function sanitizeTarget (id) {
 }
 
 function formatTarget (id) {
-    return id.length >= 13 ? sanitizeTarget(id) : ('0000000000000' + sanitizeTarget(id).replace(/^0/, '66')).slice(-13)
+  const numbers = sanitizeTarget(id)
+  if (numbers.length >= 13) return numbers
+  return ('0000000000000' + numbers.replace(/^0/, '66')).slice(-13)
 }
 
 function formatAmount (amount) {
