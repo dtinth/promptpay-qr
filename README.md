@@ -2,8 +2,6 @@
 
 [Mobile web app](#mobile-web-app), [command line app](#cli), and [JavaScript library](#api) to generate QR Code payload for PromptPay.
 
-:ambulance: **Please upgrade to 0.4.3 ASAP.** Previous versions does not work correctly with Tax IDs. :ambulance:
-
 
 ## Introduction
 
@@ -26,7 +24,7 @@ By generating a QR code, users of mobile banking apps can scan your QR code, and
 
 - The PromptPay QR code is based on [EMV QRCPS Merchant Presented Mode](https://www.emvco.com/emv-technologies/qrcodes/) specification.
 
-- **The QR code contains the PromptPay ID.** This means anyone who sees the QR code can find out your PromptPay ID (Phone number, National ID number). Please treat the QR code like your personal information.
+- **The QR code contains the PromptPay ID.** This means anyone who sees the QR code can find out your PromptPay ID (Phone number, National ID number, e-Wallet ID). Please treat the QR code like your personal information.
 
 - The QR code can optionally contain the transfer amount. Mobile banking apps use this number to pre-fill the amount for convenience.
 
