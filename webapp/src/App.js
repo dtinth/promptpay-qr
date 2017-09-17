@@ -40,7 +40,7 @@ class App extends Component {
     amount: 0
   }
   onSet = () => {
-    const id = window.prompt('Your phone number', this.state.id)
+    const id = window.prompt('Your PromptPay ID (phone number or e-Wallet ID)', this.state.id)
     if (id != null) {
       this.setState({ id })
       window.localStorage.promptpayID = id
@@ -50,7 +50,7 @@ class App extends Component {
     if (!this.state.id) {
       return (
         <div className='err'>
-          {t('กดที่นี่เพื่อตั้งค่าเบอร์โทรศัพท์', 'Tap to set PromptPay ID')}
+          {t('กดที่นี่เพื่อตั้งค่ารหัสพร้อมเพย์', 'Tap to set PromptPay ID')}
         </div>
       )
     } else {
@@ -63,13 +63,15 @@ class App extends Component {
   renderExplanation () {
     if (!this.state.id) {
       return (
-        <span>{t('กดที่กล่องข้างบน เพื่อใส่เบอร์โทรศัพท์ที่ใช้รับเงิน', 'Tap above to get started')}</span>
+        <span>{t('กดที่กล่องข้างบน เพื่อใส่รหัสพร้อมเพย์ที่ใช้รับเงิน', 'Tap above to get started')}</span>
       )
     } else {
       const id = this.state.id.replace(/[^0-9]/g, '')
       return (
         <span>
-          {id.length >= 13 ? (
+          {id.length >= 15 ? (
+            t('QR code มีรหัส e-Wallet ของคุณ', 'QR code contains your e-Wallet')
+          ) : id.length >= 13 ? (
             t('QR code มีเลขประจำตัวของคุณ', 'QR code contains your ID')
           ) : (
             t('QR code มีเบอร์โทรศัพท์ของคุณ', 'QR code contains your phone number')
