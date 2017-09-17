@@ -35,8 +35,15 @@ function generatePayload (target, options) {
   target = sanitizeTarget(target)
 
   var amount = options.amount
-  var targetType = target.length >= 15 ? BOT_ID_MERCHANT_EWALLET_ID : target.length >= 13 ? BOT_ID_MERCHANT_TAX_ID : BOT_ID_MERCHANT_PHONE_NUMBER
-
+  var targetType = (
+    target.length >= 15 ? (
+      BOT_ID_MERCHANT_EWALLET_ID
+    ) : target.length >= 13 ? (
+      BOT_ID_MERCHANT_TAX_ID
+    ) : (
+      BOT_ID_MERCHANT_PHONE_NUMBER
+    )
+  )
 
   var data = [
     f(ID_PAYLOAD_FORMAT, PAYLOAD_FORMAT_EMV_QRCPS_MERCHANT_PRESENTED_MODE),
