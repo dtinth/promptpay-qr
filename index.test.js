@@ -54,6 +54,15 @@ describe('Tax ID', () => {
   )
 })
 
+describe('eWallet ID', () => {
+  testcase(
+    'eWallet ID',
+    '012345678901234',
+    { },
+    '00020101021129390016A00000067701011103150123456789012345802TH530376463049781'
+  )
+})
+
 describe('Amount setting', () => {
   testcase(
     'Amount',
