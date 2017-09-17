@@ -26,6 +26,7 @@ var POI_METHOD_DYNAMIC = '12'
 var MERCHANT_INFORMATION_TEMPLATE_ID_GUID = '00'
 var BOT_ID_MERCHANT_PHONE_NUMBER = '01'
 var BOT_ID_MERCHANT_TAX_ID = '02'
+var BOT_ID_MERCHANT_EWALLET_ID = '03'
 var GUID_PROMPTPAY = 'A000000677010111'
 var TRANSACTION_CURRENCY_THB = '764'
 var COUNTRY_CODE_TH = 'TH'
@@ -34,7 +35,8 @@ function generatePayload (target, options) {
   target = sanitizeTarget(target)
 
   var amount = options.amount
-  var targetType = target.length >= 13 ? BOT_ID_MERCHANT_TAX_ID : BOT_ID_MERCHANT_PHONE_NUMBER
+  var targetType = target.length >= 15 ? BOT_ID_MERCHANT_EWALLET_ID : target.length >= 13 ? BOT_ID_MERCHANT_TAX_ID : BOT_ID_MERCHANT_PHONE_NUMBER
+
 
   var data = [
     f(ID_PAYLOAD_FORMAT, PAYLOAD_FORMAT_EMV_QRCPS_MERCHANT_PRESENTED_MODE),
