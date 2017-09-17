@@ -1,0 +1,14 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: node:8.2.1
+    working_directory: ~/promptpay-qr
+    steps:
+      - checkout
+      - run: |
+          yarn
+      - run: |
+          yarn test
+      - run: |
+          yarn lint
