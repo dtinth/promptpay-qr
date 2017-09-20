@@ -17,7 +17,7 @@ body {
   margin: 30px 0;
 }
 
-.qr {
+.Flipper {
   margin: 20px auto 0;
   position: relative;
   background: #090807;
@@ -27,26 +27,29 @@ body {
   max-height: 440px;
   perspective: 880px;
 }
-.qr__rotor,
-.qr__front,
-.qr__back {
+.Flipperのrotor,
+.Flipperのfront,
+.Flipperのback {
   position: absolute;
   top: 0; right: 0; bottom: 0; left: 0;
 }
-.qr__rotor {
+.Flipperのrotor {
   transform-style: preserve-3d;
 }
-.qr.is-flipped .qr__rotor {
-  transform: rotateY(180deg);
+.Flipper.is-flipped .Flipperのfront {
+  pointer-events: none;
 }
-.qr__front {
+.Flipper:not(.is-flipped) .Flipperのback {
+  pointer-events: none;
+}
+.Flipperのfront {
   transform: rotateY(0deg);
 }
-.qr__back {
+.Flipperのback {
   transform: rotateY(180deg);
 }
-.qr__front,
-.qr__back {
+.Flipperのfront,
+.Flipperのback {
   backface-visibility: hidden;
   transform-style: flat;
 }

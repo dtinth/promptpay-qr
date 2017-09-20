@@ -55,12 +55,12 @@ class Flipper extends React.Component {
         onPointerUp={this.onPointerUp}
         onPointerCancel={this.onPointerCancel}
       >
-        <div className='qr'>
-          <div className='qr__rotor' ref={el => { this.el = el }}>
-            <div className='qr__front'>
+        <div className={'Flipper' + (this.props.flipped ? ' is-flipped' : '')}>
+          <div className='Flipperのrotor' ref={el => { this.el = el }}>
+            <div className='Flipperのfront'>
               {this.props.front}
             </div>
-            <div className='qr__back'>
+            <div className='Flipperのback'>
               {this.props.back}
             </div>
           </div>
@@ -166,21 +166,28 @@ function createFlipperModel (setRotationDegrees, onFlip) {
     return projection
   }
 
+  // Based on the animation target angle, are we showing the back side?
   function isFlipped (angle) {
     return Math.round(angle / 180) % 2 !== 0
   }
 
+  // Flips the flipper (if necessary).
+  //
+  // - `flipped` Set to true to display the backside or false for front side.
   function flip (flipped) {
     const projection = getProjection()
     target = getTargetAngle(projection, flipped)
     updateAnimation()
   }
 
+  // Based on the projected angle `projection` and desired `flipped` state,
+  // determine the optimal angle to rotate the flipper to.
   function getTargetAngle (projection, flipped) {
     const offset = flipped ? 180 : 0
     return Math.round((projection - offset - 1) / 360) * 360 + offset
   }
 
+  // Queue a draw frame (for use when animation is not active).
   let pendingDraw = false
   function queueDraw () {
     if (pendingDraw) return
@@ -202,25 +209,29 @@ function createFlipperModel (setRotationDegrees, onFlip) {
     },
     pointerMove (delta) {
       current += delta
+      queueDraw()
+
+      // Maintain a brief history of dragging to calculate the ending drag speed.
       history.push({ time: Date.now(), current })
       while (history.length > 1 && history[0].time < Date.now() - 100) {
         history.shift()
       }
-      queueDraw()
     },
     pointerUp () {
       pointerIsDown = false
+
+      // Set the rotation speed to the ending speed of dragging.
       if (history.length > 0) {
         const dt = (Date.now() - history[0].time) / 1000 * 60
         const dx = current - history[0].current
         const dragSpeed = Math.max(-25, Math.min(25, dx / dt))
         currentSpeed = dragSpeed
       }
+
+      // Signal the flipping intent.
       const projection = getProjection()
       if (Math.abs(projection - target) > 90) {
         onFlip(!isFlipped(target))
-      } else {
-        onFlip(isFlipped(target))
       }
       updateAnimation()
     }
