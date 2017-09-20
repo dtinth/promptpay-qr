@@ -26,6 +26,7 @@ body {
   max-width: 440px;
   max-height: 440px;
   perspective: 880px;
+  user-select: none;
 }
 .Flipperのrotor,
 .Flipperのfront,
@@ -56,9 +57,11 @@ body {
 
 .err {
   position: absolute;
+  appearance: none;
   cursor: pointer;
   background: #8b8685;
-  top: 0; right: 0; bottom: 0; left: 0; width: 100%;
+  top: 0; right: 0; bottom: 0; left: 0; width: 100%; margin: 0;
+  text-align: center;
   box-sizing: border-box;
   border: 0;
   font: inherit;
@@ -68,6 +71,11 @@ body {
   color: #e9e8e7;
   text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
   animation: 1.2s please-input-id linear;
+}
+.err-text {
+  display: block;
+  flex: 1;
+  text-align: center;
 }
 
 @keyframes please-input-id {
@@ -138,4 +146,59 @@ h1 {
   margin: 20px 0;
   font-size: 32px;
   color: #8b8685;
+}
+
+.SlotSelector {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background: #454443;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #555453;
+}
+.SlotSelectorのitem {
+  height: 25%;
+  flex: 1;
+  box-sizing: border-box;
+  background: #252423;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  appearance: none;
+  display: flex;
+  align-items: center;
+  transition: 0.1s transform;
+  margin: 0;
+}
+.SlotSelectorのitem:not(:first-child) {
+  margin-top: 1px;
+}
+.SlotSelectorのitem:focus {
+  outline: none;
+}
+.SlotSelectorのitem.is-active {
+  background: #8b8685;
+}
+.SlotSelectorのitem:active {
+  transform: scale(0.95);
+}
+.SlotSelectorのnum {
+  display: block;
+  margin: 0 20px;
+  width: 1.5em;
+  height: 1.5em;
+  line-height: 1.5em;
+  text-align: center;
+  background: #454443;
+  font-weight: bold;
+  border-radius: 5px;
+}
+.SlotSelectorのitem.is-active .SlotSelectorのnum {
+  background: #e9e8e7;
+  color: #353433;
+}
+.SlotSelectorのinfo {
+  display: block;
+  flex: 1;
+  text-align: left;
 }
