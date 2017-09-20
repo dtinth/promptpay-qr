@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 
 import Flipper from './Flipper'
+import SlotSelector from './SlotSelector'
+import _ from 'lodash'
 import generatePayload from 'promptpay-qr'
 import qr from 'qrcode'
 
@@ -35,31 +37,62 @@ class QRCode extends Component {
   }
 }
 
+const storageKeys = {
+  1: 'promptpayID',
+  2: 'promptpayID2',
+  3: 'promptpayID3',
+  4: 'promptpayID4'
+}
+
+function sanitizeId (id) {
+  return String(id).replace(/[^0-9]/g, '')
+}
+
 class App extends Component {
-  state = {
-    id: String(window.localStorage.promptpayID || ''),
-    amount: 0,
-    flipped: false
+  state = this.getInitialState()
+  getInitialState () {
+    const slotNumber = +window.localStorage.promptPayActiveSlot || 1
+    const data = _.mapValues(storageKeys, (storageKey) => (
+      sanitizeId(window.localStorage[storageKey] || '')
+    ))
+    return {
+      data: data,
+      slotNumber: slotNumber,
+      amount: 0,
+      flipped: false
+    }
   }
   onSet = () => {
-    const id = window.prompt('Your PromptPay ID (phone number or e-Wallet ID)', this.state.id)
+    const id = window.prompt('Your PromptPay ID (phone number or e-Wallet ID)', this.getId())
     if (id != null) {
-      this.setState({ id })
-      window.localStorage.promptpayID = id
+      const sanitizedId = sanitizeId(id)
+      const n = this.state.slotNumber
+      this.setState({ data: { ...this.state.data, [n]: sanitizedId } })
+      window.localStorage[storageKeys[n]] = sanitizedId
     }
   }
   onFlip = (flipped) => {
     this.setState({ flipped })
   }
+  onSelectSlot = (slot) => {
+    this.setState({ slotNumber: slot, flipped: false })
+    window.localStorage.promptPayActiveSlot = slot
+  }
+  getId () {
+    return this.state.data[this.state.slotNumber]
+  }
   renderQR () {
-    if (!this.state.id) {
+    const id = this.getId()
+    if (!id) {
       return (
         <button className='err' onClick={this.onSet}>
-          {t('กดที่นี่เพื่อตั้งค่ารหัสพร้อมเพย์', 'Tap to set PromptPay ID')}
+          <span className='err-text'>
+            {t('กดที่นี่เพื่อตั้งค่ารหัสพร้อมเพย์', 'Tap to set PromptPay ID')}
+          </span>
         </button>
       )
     } else {
-      const payload = generatePayload(this.state.id, { amount: this.state.amount })
+      const payload = generatePayload(id, { amount: this.state.amount })
       return (
         <div className='qrcode-container' onClick={this.onSet}>
           <QRCode payload={payload} />
@@ -68,12 +101,17 @@ class App extends Component {
     }
   }
   renderExplanation () {
-    if (!this.state.id) {
+    if (this.state.flipped) {
+      return (
+        <span>{t('เลือกตำแหน่งข้อมูล', 'Select a data slot')}</span>
+      )
+    }
+    const id = this.getId()
+    if (!id) {
       return (
         <span>{t('กดที่กล่องข้างบน เพื่อใส่รหัสพร้อมเพย์ที่ใช้รับเงิน', 'Tap above to get started')}</span>
       )
     } else {
-      const id = this.state.id.replace(/[^0-9]/g, '')
       return (
         <span>
           {id.length >= 15 ? (
@@ -90,11 +128,11 @@ class App extends Component {
   }
   renderSlotSelector () {
     return (
-      <div onClick={() => this.setState({ flipped: false })}>
-        SLOT 1<br />
-        SLOT 2<br />
-        SLOT 3
-      </div>
+      <SlotSelector
+        active={this.state.slotNumber}
+        data={this.state.data}
+        onSelect={this.onSelectSlot}
+      />
     )
   }
   render () {
