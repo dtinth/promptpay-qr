@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+import Flipper from './Flipper'
 import generatePayload from 'promptpay-qr'
 import qr from 'qrcode'
 
@@ -37,7 +38,8 @@ class QRCode extends Component {
 class App extends Component {
   state = {
     id: String(window.localStorage.promptpayID || ''),
-    amount: 0
+    amount: 0,
+    flipped: false
   }
   onSet = () => {
     const id = window.prompt('Your PromptPay ID (phone number or e-Wallet ID)', this.state.id)
@@ -46,17 +48,22 @@ class App extends Component {
       window.localStorage.promptpayID = id
     }
   }
+  onFlip = (flipped) => {
+    this.setState({ flipped })
+  }
   renderQR () {
     if (!this.state.id) {
       return (
-        <div className='err'>
+        <button className='err' onClick={this.onSet}>
           {t('กดที่นี่เพื่อตั้งค่ารหัสพร้อมเพย์', 'Tap to set PromptPay ID')}
-        </div>
+        </button>
       )
     } else {
       const payload = generatePayload(this.state.id, { amount: this.state.amount })
       return (
-        <QRCode payload={payload} />
+        <div className='qrcode-container' onClick={this.onSet}>
+          <QRCode payload={payload} />
+        </div>
       )
     }
   }
@@ -81,12 +88,24 @@ class App extends Component {
       )
     }
   }
+  renderSlotSelector () {
+    return (
+      <div onClick={() => this.setState({ flipped: false })}>
+        SLOT 1<br />
+        SLOT 2<br />
+        SLOT 3
+      </div>
+    )
+  }
   render () {
     return (
       <div className='App'>
-        <div className='qr' onClick={this.onSet}>
-          {this.renderQR()}
-        </div>
+        <Flipper
+          front={this.renderQR()}
+          back={this.renderSlotSelector()}
+          flipped={this.state.flipped}
+          onFlip={this.onFlip}
+        />
         <div className='qr-explanation'>
           {this.renderExplanation()}
         </div>

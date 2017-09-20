@@ -20,20 +20,49 @@ body {
 .qr {
   margin: 20px auto 0;
   position: relative;
-  background: #8b8685;
+  background: #090807;
   width: 100vw;
   height: 100vw;
   max-width: 440px;
   max-height: 440px;
-  cursor: pointer;
+  perspective: 880px;
+}
+.qr__rotor,
+.qr__front,
+.qr__back {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+}
+.qr__rotor {
+  transform-style: preserve-3d;
+}
+.qr.is-flipped .qr__rotor {
+  transform: rotateY(180deg);
+}
+.qr__front {
+  transform: rotateY(0deg);
+}
+.qr__back {
+  transform: rotateY(180deg);
+}
+.qr__front,
+.qr__back {
+  backface-visibility: hidden;
+  transform-style: flat;
 }
 
 .err {
   position: absolute;
-  top: 0; right: 0; bottom: 0; left: 0;
+  cursor: pointer;
+  background: #8b8685;
+  top: 0; right: 0; bottom: 0; left: 0; width: 100%;
+  box-sizing: border-box;
+  border: 0;
+  font: inherit;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #e9e8e7;
   text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
   animation: 1.2s please-input-id linear;
 }
@@ -46,6 +75,12 @@ body {
   80% { transform: scale(1); animation-timing-function: ease; }
   90% { transform: scale(1.1); animation-timing-function: ease; }
   100% { transform: scale(1); }
+}
+
+.qrcode-container {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  cursor: pointer;
 }
 
 .qrcode {
