@@ -1,3 +1,6 @@
+import '../src/index.css'
+import 'pepjs'
+
 import { configure } from '@storybook/react'
 
 function loadStories () {
