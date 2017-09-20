@@ -26,13 +26,16 @@ class QRCode extends Component {
         return
       }
       if (this.payload === payload) {
-        this.setState({ svg })
+        const src = 'data:image/svg+xml,' + encodeURIComponent(svg)
+        this.setState({ src })
       }
     })
   }
   render () {
     return (
-      <div className='qrcode' dangerouslySetInnerHTML={{ __html: this.state.svg }} />
+      <div className='qrcode'>
+        <img src={this.state.src} alt='QR Code' />
+      </div>
     )
   }
 }
