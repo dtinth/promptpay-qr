@@ -74,6 +74,9 @@ export default Flipper
 
 // This model object takes care of the state and animation and handles input.
 function createFlipperModel (setRotationDegrees, onFlip) {
+  // XXX: A lot of mutable variables here!!!
+  //      If you are up for a challenge, please help clean up this code!
+
   // Current rotation to be rendered (degrees)
   let current = 0
 
@@ -82,6 +85,9 @@ function createFlipperModel (setRotationDegrees, onFlip) {
 
   // Current rotation speed (degrees/frame)
   let currentSpeed = 0
+
+  // Spring strength
+  const springK = 1 / 15
 
   // Rotation acceleration (degrees/frame^2)
   const acceleration = 0.7
@@ -135,17 +141,22 @@ function createFlipperModel (setRotationDegrees, onFlip) {
 
   // Animation update logic.
   function update () {
-    const bestSpeed = (target - current) / 15
-    if (Math.abs(bestSpeed - currentSpeed) < acceleration) {
-      currentSpeed = bestSpeed
-    } else if (currentSpeed < bestSpeed) {
-      currentSpeed += acceleration
-    } else {
-      currentSpeed -= acceleration
-    }
+    const bestSpeed = (target - current) * springK
+    currentSpeed = linearlyApproach(currentSpeed, bestSpeed, acceleration)
     current += currentSpeed
     if (Math.abs(current - target) < 0.1) {
       current = target
+    }
+  }
+
+  // Linearly approach target by at most delta.
+  function linearlyApproach (current, target, delta) {
+    if (Math.abs(current - target) < delta) {
+      return target
+    } else if (current < target) {
+      return current + delta
+    } else {
+      return current - delta
     }
   }
 
@@ -160,7 +171,8 @@ function createFlipperModel (setRotationDegrees, onFlip) {
     let projection = current
     let speed = currentSpeed
     for (let i = 0; i < 600; i++) {
-      speed *= 1 - 1 / 15
+      const targetSpeed = speed * (1 - springK)
+      speed = linearlyApproach(speed, targetSpeed, acceleration)
       projection += speed
     }
     return projection
