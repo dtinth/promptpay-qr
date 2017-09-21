@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 
+import Flipper from './Flipper'
+import SlotSelector from './SlotSelector'
+import _ from 'lodash'
 import generatePayload from 'promptpay-qr'
 import qr from 'qrcode'
 
@@ -23,53 +26,103 @@ class QRCode extends Component {
         return
       }
       if (this.payload === payload) {
-        this.setState({ svg })
+        const src = 'data:image/svg+xml,' + encodeURIComponent(svg)
+        this.setState({ src })
       }
     })
   }
   render () {
     return (
-      <div className='qrcode' dangerouslySetInnerHTML={{ __html: this.state.svg }} />
+      <div className='qrcode'>
+        <img src={this.state.src} alt='QR Code' />
+      </div>
     )
   }
 }
 
+const storageKeys = {
+  1: 'promptpayID',
+  2: 'promptpayID2',
+  3: 'promptpayID3',
+  4: 'promptpayID4'
+}
+
+function sanitizeId (id) {
+  return String(id).replace(/[^0-9]/g, '')
+}
+
 class App extends Component {
-  state = {
-    id: String(window.localStorage.promptpayID || ''),
-    amount: 0
-  }
-  onSet = () => {
-    const id = window.prompt('Your phone number', this.state.id)
-    if (id != null) {
-      this.setState({ id })
-      window.localStorage.promptpayID = id
+  state = this.getInitialState()
+  getInitialState () {
+    const slotNumber = +window.localStorage.promptPayActiveSlot || 1
+    const data = _.mapValues(storageKeys, (storageKey) => (
+      sanitizeId(window.localStorage[storageKey] || '')
+    ))
+    return {
+      data: data,
+      slotNumber: slotNumber,
+      amount: 0,
+      flipped: false
     }
   }
+  onSet = () => {
+    const id = window.prompt('Your PromptPay ID (phone number or e-Wallet ID)', this.getId())
+    if (id != null) {
+      const sanitizedId = sanitizeId(id)
+      const n = this.state.slotNumber
+      this.setState({ data: { ...this.state.data, [n]: sanitizedId } })
+      window.localStorage[storageKeys[n]] = sanitizedId
+    }
+  }
+  onFlip = (flipped) => {
+    this.setState({ flipped })
+  }
+  onSelectSlot = (slot) => {
+    this.setState({ slotNumber: slot, flipped: false })
+    window.localStorage.promptPayActiveSlot = slot
+    if (window.ga) {
+      window.ga('send', 'event', 'Slot', 'select', `slot ${slot}`)
+    }
+  }
+  getId () {
+    return this.state.data[this.state.slotNumber]
+  }
   renderQR () {
-    if (!this.state.id) {
+    const id = this.getId()
+    if (!id) {
       return (
-        <div className='err'>
-          {t('กดที่นี่เพื่อตั้งค่าเบอร์โทรศัพท์', 'Tap to set PromptPay ID')}
-        </div>
+        <button className='err' onClick={this.onSet}>
+          <span className='err-text'>
+            {t('กดที่นี่เพื่อตั้งค่ารหัสพร้อมเพย์', 'Tap to set PromptPay ID')}
+          </span>
+        </button>
       )
     } else {
-      const payload = generatePayload(this.state.id, { amount: this.state.amount })
+      const payload = generatePayload(id, { amount: this.state.amount })
       return (
-        <QRCode payload={payload} />
+        <div className='qrcode-container' onClick={this.onSet}>
+          <QRCode payload={payload} />
+        </div>
       )
     }
   }
   renderExplanation () {
-    if (!this.state.id) {
+    if (this.state.flipped) {
       return (
-        <span>{t('กดที่กล่องข้างบน เพื่อใส่เบอร์โทรศัพท์ที่ใช้รับเงิน', 'Tap above to get started')}</span>
+        <span>{t('เลือกตำแหน่งข้อมูล', 'Select a data slot')}</span>
+      )
+    }
+    const id = this.getId()
+    if (!id) {
+      return (
+        <span>{t('กดที่กล่องข้างบน เพื่อใส่รหัสพร้อมเพย์ที่ใช้รับเงิน', 'Tap above to get started')}</span>
       )
     } else {
-      const id = this.state.id.replace(/[^0-9]/g, '')
       return (
         <span>
-          {id.length >= 13 ? (
+          {id.length >= 15 ? (
+            t('QR code มีรหัส e-Wallet ของคุณ', 'QR code contains your e-Wallet')
+          ) : id.length >= 13 ? (
             t('QR code มีเลขประจำตัวของคุณ', 'QR code contains your ID')
           ) : (
             t('QR code มีเบอร์โทรศัพท์ของคุณ', 'QR code contains your phone number')
@@ -79,12 +132,24 @@ class App extends Component {
       )
     }
   }
+  renderSlotSelector () {
+    return (
+      <SlotSelector
+        active={this.state.slotNumber}
+        data={this.state.data}
+        onSelect={this.onSelectSlot}
+      />
+    )
+  }
   render () {
     return (
       <div className='App'>
-        <div className='qr' onClick={this.onSet}>
-          {this.renderQR()}
-        </div>
+        <Flipper
+          front={this.renderQR()}
+          back={this.renderSlotSelector()}
+          flipped={this.state.flipped}
+          onFlip={this.onFlip}
+        />
         <div className='qr-explanation'>
           {this.renderExplanation()}
         </div>

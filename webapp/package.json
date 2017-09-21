@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "promptpay-qr": "0.4.3",
+    "pepjs": "^0.4.3",
+    "promptpay-qr": "0.4.4",
     "qrcode": "^0.9.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-pointable": "^1.1.0",
     "react-scripts": "1.0.12"
   },
   "standard": {
@@ -16,9 +18,13 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^3.2.6",
+    "@storybook/react": "3.2.8",
     "babel-eslint": "^7.2.3",
     "standard": "^10.0.3"
   }
