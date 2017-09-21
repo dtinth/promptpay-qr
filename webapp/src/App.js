@@ -80,6 +80,9 @@ class App extends Component {
   onSelectSlot = (slot) => {
     this.setState({ slotNumber: slot, flipped: false })
     window.localStorage.promptPayActiveSlot = slot
+    if (window.ga) {
+      window.ga('send', 'event', 'Slot', 'select', `slot ${slot}`)
+    }
   }
   getId () {
     return this.state.data[this.state.slotNumber]
