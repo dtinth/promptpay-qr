@@ -106,7 +106,13 @@ Returns a string which should be rendered as a QR code.
 These libraries are written by other developers:
 
 - PHP: [kittinan/php-promptpay-qr](https://github.com/kittinan/php-promptpay-qr)
-- WordPress: [woodpeckerr/promptpay](https://github.com/woodpeckerr/promptpay)
+
+
+## Integrations with other software
+
+These plugins/integrations are written by other developers:
+
+- WordPress: [woodpeckerr/promptpay](https://github.com/woodpeckerr/promptpay) (supports shortcodes and integration with WooCommerce)
 
 
 ## License
