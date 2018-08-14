@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "gl-matrix": "^2.7.1",
     "pepjs": "^0.4.3",
     "promptpay-qr": "0.4.4",
     "qrcode": "^0.9.0",
@@ -26,6 +27,6 @@
     "@storybook/addon-actions": "^3.2.6",
     "@storybook/react": "3.2.8",
     "babel-eslint": "^7.2.3",
-    "standard": "^10.0.3"
+    "standard": "^11.0.1"
   }
 }
