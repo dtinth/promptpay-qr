@@ -2,12 +2,20 @@ version: 2
 jobs:
   build:
     docker:
-      - image: node:8.2.1
+      - image: circleci/node:8.2.1
     working_directory: ~/promptpay-qr
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - yarn-v1-{{ checksum "yarn.lock" }}
+            - yarn-v1-
       - run: |
           yarn
+      - save_cache:
+          key: yarn-v1-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn/v1
       - run: |
           yarn test
       - run: |
