@@ -10,32 +10,32 @@
  * @license MIT
  */
 
-var crc = require('crc')
+const crc = require('crc')
 
-var ID_PAYLOAD_FORMAT = '00'
-var ID_POI_METHOD = '01'
-var ID_MERCHANT_INFORMATION_BOT = '29'
-var ID_TRANSACTION_CURRENCY = '53'
-var ID_TRANSACTION_AMOUNT = '54'
-var ID_COUNTRY_CODE = '58'
-var ID_CRC = '63'
+const ID_PAYLOAD_FORMAT = '00'
+const ID_POI_METHOD = '01'
+const ID_MERCHANT_INFORMATION_BOT = '29'
+const ID_TRANSACTION_CURRENCY = '53'
+const ID_TRANSACTION_AMOUNT = '54'
+const ID_COUNTRY_CODE = '58'
+const ID_CRC = '63'
 
-var PAYLOAD_FORMAT_EMV_QRCPS_MERCHANT_PRESENTED_MODE = '01'
-var POI_METHOD_STATIC = '11'
-var POI_METHOD_DYNAMIC = '12'
-var MERCHANT_INFORMATION_TEMPLATE_ID_GUID = '00'
-var BOT_ID_MERCHANT_PHONE_NUMBER = '01'
-var BOT_ID_MERCHANT_TAX_ID = '02'
-var BOT_ID_MERCHANT_EWALLET_ID = '03'
-var GUID_PROMPTPAY = 'A000000677010111'
-var TRANSACTION_CURRENCY_THB = '764'
-var COUNTRY_CODE_TH = 'TH'
+const PAYLOAD_FORMAT_EMV_QRCPS_MERCHANT_PRESENTED_MODE = '01'
+const POI_METHOD_STATIC = '11'
+const POI_METHOD_DYNAMIC = '12'
+const MERCHANT_INFORMATION_TEMPLATE_ID_GUID = '00'
+const BOT_ID_MERCHANT_PHONE_NUMBER = '01'
+const BOT_ID_MERCHANT_TAX_ID = '02'
+const BOT_ID_MERCHANT_EWALLET_ID = '03'
+const GUID_PROMPTPAY = 'A000000677010111'
+const TRANSACTION_CURRENCY_THB = '764'
+const COUNTRY_CODE_TH = 'TH'
 
 function generatePayload (target, options) {
   target = sanitizeTarget(target)
 
-  var amount = options.amount
-  var targetType = (
+  const amount = options.amount
+  const targetType = (
     target.length >= 15 ? (
       BOT_ID_MERCHANT_EWALLET_ID
     ) : target.length >= 13 ? (
@@ -45,7 +45,7 @@ function generatePayload (target, options) {
     )
   )
 
-  var data = [
+  const data = [
     f(ID_PAYLOAD_FORMAT, PAYLOAD_FORMAT_EMV_QRCPS_MERCHANT_PRESENTED_MODE),
     f(ID_POI_METHOD, amount ? POI_METHOD_DYNAMIC : POI_METHOD_STATIC),
     f(ID_MERCHANT_INFORMATION_BOT, serialize([
@@ -56,17 +56,17 @@ function generatePayload (target, options) {
     f(ID_TRANSACTION_CURRENCY, TRANSACTION_CURRENCY_THB),
     amount && f(ID_TRANSACTION_AMOUNT, formatAmount(amount))
   ]
-  var dataToCrc = serialize(data) + ID_CRC + '04'
+  const dataToCrc = `${serialize(data) + ID_CRC}04`
   data.push(f(ID_CRC, formatCrc(crc.crc16xmodem(dataToCrc, 0xffff))))
   return serialize(data)
 }
 
 function f (id, value) {
-  return [ id, ('00' + value.length).slice(-2), value ].join('')
+  return [ id, (`00${value.length}`).slice(-2), value ].join('')
 }
 
 function serialize (xs) {
-  return xs.filter(function (x) { return x }).join('')
+  return xs.filter(x => x).join('')
 }
 
 function sanitizeTarget (id) {
@@ -76,7 +76,7 @@ function sanitizeTarget (id) {
 function formatTarget (id) {
   const numbers = sanitizeTarget(id)
   if (numbers.length >= 13) return numbers
-  return ('0000000000000' + numbers.replace(/^0/, '66')).slice(-13)
+  return (`0000000000000${numbers.replace(/^0/, '66')}`).slice(-13)
 }
 
 function formatAmount (amount) {
@@ -84,7 +84,7 @@ function formatAmount (amount) {
 }
 
 function formatCrc (crcValue) {
-  return ('0000' + crcValue.toString(16).toUpperCase()).slice(-4)
+  return (`0000${crcValue.toString(16).toUpperCase()}`).slice(-4)
 }
 
 module.exports = generatePayload
