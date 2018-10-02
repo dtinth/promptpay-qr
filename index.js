@@ -10,31 +10,31 @@
  * @license MIT
  */
 
-const crc = require('crc');
+const crc = require('crc')
 
-const ID_PAYLOAD_FORMAT = '00';
-const ID_POI_METHOD = '01';
-const ID_MERCHANT_INFORMATION_BOT = '29';
-const ID_TRANSACTION_CURRENCY = '53';
-const ID_TRANSACTION_AMOUNT = '54';
-const ID_COUNTRY_CODE = '58';
-const ID_CRC = '63';
+const ID_PAYLOAD_FORMAT = '00'
+const ID_POI_METHOD = '01'
+const ID_MERCHANT_INFORMATION_BOT = '29'
+const ID_TRANSACTION_CURRENCY = '53'
+const ID_TRANSACTION_AMOUNT = '54'
+const ID_COUNTRY_CODE = '58'
+const ID_CRC = '63'
 
-const PAYLOAD_FORMAT_EMV_QRCPS_MERCHANT_PRESENTED_MODE = '01';
-const POI_METHOD_STATIC = '11';
-const POI_METHOD_DYNAMIC = '12';
-const MERCHANT_INFORMATION_TEMPLATE_ID_GUID = '00';
-const BOT_ID_MERCHANT_PHONE_NUMBER = '01';
-const BOT_ID_MERCHANT_TAX_ID = '02';
-const BOT_ID_MERCHANT_EWALLET_ID = '03';
-const GUID_PROMPTPAY = 'A000000677010111';
-const TRANSACTION_CURRENCY_THB = '764';
-const COUNTRY_CODE_TH = 'TH';
+const PAYLOAD_FORMAT_EMV_QRCPS_MERCHANT_PRESENTED_MODE = '01'
+const POI_METHOD_STATIC = '11'
+const POI_METHOD_DYNAMIC = '12'
+const MERCHANT_INFORMATION_TEMPLATE_ID_GUID = '00'
+const BOT_ID_MERCHANT_PHONE_NUMBER = '01'
+const BOT_ID_MERCHANT_TAX_ID = '02'
+const BOT_ID_MERCHANT_EWALLET_ID = '03'
+const GUID_PROMPTPAY = 'A000000677010111'
+const TRANSACTION_CURRENCY_THB = '764'
+const COUNTRY_CODE_TH = 'TH'
 
 function generatePayload (target, options) {
   target = sanitizeTarget(target)
 
-  const amount = options.amount;
+  const amount = options.amount
   const targetType = (
     target.length >= 15 ? (
       BOT_ID_MERCHANT_EWALLET_ID
@@ -43,7 +43,7 @@ function generatePayload (target, options) {
     ) : (
       BOT_ID_MERCHANT_PHONE_NUMBER
     )
-  );
+  )
 
   const data = [
     f(ID_PAYLOAD_FORMAT, PAYLOAD_FORMAT_EMV_QRCPS_MERCHANT_PRESENTED_MODE),
@@ -55,8 +55,8 @@ function generatePayload (target, options) {
     f(ID_COUNTRY_CODE, COUNTRY_CODE_TH),
     f(ID_TRANSACTION_CURRENCY, TRANSACTION_CURRENCY_THB),
     amount && f(ID_TRANSACTION_AMOUNT, formatAmount(amount))
-  ];
-  const dataToCrc = `${serialize(data) + ID_CRC}04`;
+  ]
+  const dataToCrc = `${serialize(data) + ID_CRC}04`
   data.push(f(ID_CRC, formatCrc(crc.crc16xmodem(dataToCrc, 0xffff))))
   return serialize(data)
 }
