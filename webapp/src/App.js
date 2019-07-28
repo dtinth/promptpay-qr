@@ -4,7 +4,6 @@ import Flipper from './Flipper'
 import SlotSelector from './SlotSelector'
 import _ from 'lodash'
 import generatePayload from 'promptpay-qr'
-import qr from 'qrcode'
 import QRCode from './QRCode'
 
 const ver = require('promptpay-qr/package.json').version
