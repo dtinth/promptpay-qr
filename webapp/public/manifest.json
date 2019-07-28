@@ -2,7 +2,23 @@
   "short_name": "promptpay-qr",
   "name": "ppqr.app",
   "start_url": "./index.html",
-  "icons": [ { "src": "/icon.png", "type": "image/png", "sizes": "144x144x" } ],
+  "icons": [
+      {
+        "src": "/icon-384.png",
+        "type": "image/png",
+        "sizes": "384x384"
+      },
+      {
+        "src": "/icon-192.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "/icon-512.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+  ],
   "display": "standalone",
   "theme_color": "#090807",
   "background_color": "#353433"
