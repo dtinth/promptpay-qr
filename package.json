@@ -9,8 +9,7 @@
     "cli.js"
   ],
   "devDependencies": {
-    "jest": "^24.8.0",
-    "standard": "^10.0.3"
+    "jest": "^24.8.0"
   },
   "name": "promptpay-qr",
   "bin": {
