@@ -1,6 +1,6 @@
 {
   "short_name": "promptpay-qr",
-  "name": "promptpay2.me",
+  "name": "ppqr.app",
   "start_url": "./index.html",
   "icons": [ { "src": "/icon.png", "type": "image/png", "sizes": "144x144x" } ],
   "display": "standalone",
