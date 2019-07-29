@@ -1,10 +1,10 @@
-import './index.css'
-import 'pepjs'
+import "./index.css";
+import "pepjs";
 
-import App from './App'
-import React from 'react'
-import ReactDOM from 'react-dom'
-import registerServiceWorker from './registerServiceWorker'
+import App from "./App";
+import React from "react";
+import ReactDOM from "react-dom";
+import { register } from "./serviceWorker";
 
-ReactDOM.render(<App />, document.getElementById('root'))
-registerServiceWorker()
+ReactDOM.render(<App />, document.getElementById("root"));
+register();
