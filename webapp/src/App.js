@@ -51,8 +51,11 @@ class App extends Component {
   onSelectSlot = slot => {
     this.setState({ slotNumber: slot, flipped: false })
     window.localStorage.promptPayActiveSlot = slot
-    if (window.ga) {
-      window.ga('send', 'event', 'Slot', 'select', `slot ${slot}`)
+    if (window.gtag) {
+      window.gtag('event', 'select', {
+        event_category: 'Slot',
+        event_label: `slot ${slot}`,
+      })
     }
   }
   getId() {
@@ -100,11 +103,11 @@ class App extends Component {
                 'QR code contains your e-Wallet',
               )
             : id.length >= 13
-              ? t('QR code มีเลขประจำตัวของคุณ', 'QR code contains your ID')
-              : t(
-                  'QR code มีเบอร์โทรศัพท์ของคุณ',
-                  'QR code contains your phone number',
-                )}
+            ? t('QR code มีเลขประจำตัวของคุณ', 'QR code contains your ID')
+            : t(
+                'QR code มีเบอร์โทรศัพท์ของคุณ',
+                'QR code contains your phone number',
+              )}
           :{' '}
           <strong
             onClick={this.onSet}
@@ -159,7 +162,8 @@ class App extends Component {
           Powered by{' '}
           <a href="https://github.com/dtinth/promptpay-qr" target="_blank">
             promptpay-qr
-          </a>@{ver}
+          </a>
+          @{ver}
         </div>
       </div>
     )
