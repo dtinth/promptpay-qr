@@ -18,5 +18,4 @@ jobs:
             - ~/.cache/yarn/v1
       - run: |
           yarn test
-      - run: |
-          yarn lint
+      # TODO: Add back linting script

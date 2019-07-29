@@ -4,28 +4,23 @@ import { storiesOf } from '@storybook/react'
 
 class QRCodeDemo extends React.Component {
   state = { text: this.getText() }
-  getText () {
+  getText() {
     return new Date().toString()
   }
-  componentDidMount () {
+  componentDidMount() {
     this.interval = setInterval(() => {
       this.refresh()
     }, 1000)
   }
-  refresh () {
+  refresh() {
     this.setState({ text: this.getText() })
   }
-  componentWillUnmount () {
+  componentWillUnmount() {
     clearInterval(this.interval)
   }
-  render () {
-    return (
-      <QRCode payload={this.state.text} />
-    )
+  render() {
+    return <QRCode payload={this.state.text} />
   }
 }
 
-storiesOf('QRCode', module)
-  .add('QR codes', () => (
-    <QRCodeDemo />
-  ))
+storiesOf('QRCode', module).add('QR codes', () => <QRCodeDemo />)

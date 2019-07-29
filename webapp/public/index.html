@@ -1,24 +1,39 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <title>promptpay2.me</title>
-    <meta name="description" content="สร้าง QR Code สำหรับรับเงินผ่าน PromptPay">
-    <meta property="og:title" content="promptpay2.me" />
-    <meta property="og:description" content="สร้าง QR Code สำหรับรับเงินผ่าน PromptPay" />
+    <meta charset="utf-8" />
+    <title>ppqr.app</title>
+    <meta
+      name="description"
+      content="สร้าง QR Code สำหรับรับเงินผ่าน PromptPay"
+    />
+    <link rel="canonical" href="https://ppqr.app" />
+    <meta property="og:title" content="ppqr.app" />
+    <meta
+      property="og:description"
+      content="สร้าง QR Code สำหรับรับเงินผ่าน PromptPay"
+    />
 
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="%PUBLIC_URL%/icon.png" id="icon1">
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/icon.png" id="icon2">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link
+      rel="icon"
+      sizes="192x192"
+      href="%PUBLIC_URL%/icon-192.png"
+      id="icon1"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/icon-192.png" id="icon2" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#090807">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#090807" />
     <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
-    <link rel="manifest" id="manifest" href="<%= 'data:application/json;base64,' + new Buffer(JSON.stringify(require('./manifest.json'))).toString('base64') %>">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/icon.png">
+    <link rel="manifest" id="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/icon.png" />
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -30,7 +45,7 @@
     -->
   </head>
   <body>
-    <h1>promptpay2.me</h1>
+    <h1>ppqr.app</h1>
     <div id="root">
       <div class="loading">
         <p>สร้าง QR Code สำหรับรับเงินผ่าน PromptPay</p>
@@ -50,15 +65,19 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-59441941-3"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
 
-  ga('create', 'UA-59441941-3', 'auto');
-  ga('send', 'pageview');
-
-</script>
+      gtag('config', 'UA-59441941-3')
+    </script>
   </body>
 </html>

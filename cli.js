@@ -12,7 +12,11 @@ if (!/^(0|66)\d{9}|\d{13}$/.test(target)) {
 const payload = generatePayload(target, { amount: +argv.amount || +argv._[1] })
 console.log(payload)
 
-qr.toString(payload, { type: 'terminal', errorCorrectionLevel: 'L' }, (e, s) => {
-  if (e) throw e
-  console.log(s)
-})
+qr.toString(
+  payload,
+  { type: 'terminal', errorCorrectionLevel: 'L' },
+  (e, s) => {
+    if (e) throw e
+    console.log(s)
+  },
+)
