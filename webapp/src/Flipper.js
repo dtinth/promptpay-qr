@@ -10,59 +10,61 @@ import React from 'react'
 // - `onFlip(flipped)` Called when user initiates a flip.
 //
 class Flipper extends React.Component {
-  componentDidMount () {
-    this.animator = createFlipperModel((degrees) => {
+  componentDidMount() {
+    this.animator = createFlipperModel(degrees => {
       this.el.style.transform = `rotateY(${degrees}deg)`
     }, this.onFlip)
     this.animator.setFlipped(!!this.props.flipped)
   }
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (nextProps.flipped !== this.props.flipped) {
       this.animator.setFlipped(!!nextProps.flipped)
     }
   }
-  onFlip = (flipped) => {
+  onFlip = flipped => {
     if (this.props.onFlip) this.props.onFlip(flipped)
   }
-  onPointerDown = (e) => {
+  onPointerDown = e => {
     if (!this.activePointer) {
       this.activePointer = { pointerId: e.pointerId, lastX: e.clientX }
       this.animator.pointerDown()
     }
   }
-  onPointerMove = (e) => {
+  onPointerMove = e => {
     if (!this.activePointer) return
     if (this.activePointer.pointerId !== e.pointerId) return
-    const delta = (e.clientX - this.activePointer.lastX) / this.el.offsetWidth * 180
+    const delta =
+      (e.clientX - this.activePointer.lastX) / this.el.offsetWidth * 180
     this.activePointer.lastX = e.clientX
     this.animator.pointerMove(delta)
   }
-  onPointerUp = (e) => {
+  onPointerUp = e => {
     this.animator.pointerUp()
     this.activePointer = null
   }
-  onPointerCancel = (e) => {
+  onPointerCancel = e => {
     this.animator.pointerUp()
     this.activePointer = null
   }
-  render () {
+  render() {
     return (
       <Pointable
         style={{ touchAction: 'pan-y' }}
-        touchAction='pan-y'
+        touchAction="pan-y"
         onPointerDown={this.onPointerDown}
         onPointerMove={this.onPointerMove}
         onPointerUp={this.onPointerUp}
         onPointerCancel={this.onPointerCancel}
       >
         <div className={'Flipper' + (this.props.flipped ? ' is-flipped' : '')}>
-          <div className='Flipperのrotor' ref={el => { this.el = el }}>
-            <div className='Flipperのfront'>
-              {this.props.front}
-            </div>
-            <div className='Flipperのback'>
-              {this.props.back}
-            </div>
+          <div
+            className="Flipperのrotor"
+            ref={el => {
+              this.el = el
+            }}
+          >
+            <div className="Flipperのfront">{this.props.front}</div>
+            <div className="Flipperのback">{this.props.back}</div>
           </div>
         </div>
       </Pointable>
@@ -73,7 +75,7 @@ class Flipper extends React.Component {
 export default Flipper
 
 // This model object takes care of the state and animation and handles input.
-function createFlipperModel (setRotationDegrees, onFlip) {
+function createFlipperModel(setRotationDegrees, onFlip) {
   // XXX: A lot of mutable variables here!!!
   //      If you are up for a challenge, please help clean up this code!
 
@@ -99,10 +101,10 @@ function createFlipperModel (setRotationDegrees, onFlip) {
 
   // State of dragging
   let pointerIsDown = false
-  let history = [ ]
+  let history = []
 
   // Returns whether an animation should run.
-  function shouldAnimate () {
+  function shouldAnimate() {
     // Don’t animate while dragging
     if (pointerIsDown) return false
 
@@ -111,7 +113,7 @@ function createFlipperModel (setRotationDegrees, onFlip) {
   }
 
   // Ensure that animation frame is requested (if an animation is needed).
-  function updateAnimation () {
+  function updateAnimation() {
     if (!animationActive && shouldAnimate()) {
       animationStartTime = Date.now()
       lastFrameNumber = 0
@@ -121,7 +123,7 @@ function createFlipperModel (setRotationDegrees, onFlip) {
   }
 
   // The animation frame. Calls update (handle frameskip) and draw.
-  function frame () {
+  function frame() {
     if (!animationActive) return
     const expectedFrameNumber = (Date.now() - animationStartTime) / 1000 * 60
     const updateCount = Math.min(expectedFrameNumber - lastFrameNumber, 10)
@@ -140,7 +142,7 @@ function createFlipperModel (setRotationDegrees, onFlip) {
   }
 
   // Animation update logic.
-  function update () {
+  function update() {
     const bestSpeed = (target - current) * springK
     currentSpeed = linearlyApproach(currentSpeed, bestSpeed, acceleration)
     current += currentSpeed
@@ -150,7 +152,7 @@ function createFlipperModel (setRotationDegrees, onFlip) {
   }
 
   // Linearly approach target by at most delta.
-  function linearlyApproach (current, target, delta) {
+  function linearlyApproach(current, target, delta) {
     if (Math.abs(current - target) < delta) {
       return target
     } else if (current < target) {
@@ -161,13 +163,13 @@ function createFlipperModel (setRotationDegrees, onFlip) {
   }
 
   // Animation draw logic.
-  function draw () {
+  function draw() {
     setRotationDegrees(current)
   }
 
   // Based on current animation state, simulate the projected rotation angle
   // if we allow the spinning to stop without intervention.
-  function getProjection () {
+  function getProjection() {
     let projection = current
     let speed = currentSpeed
     for (let i = 0; i < 600; i++) {
@@ -179,14 +181,14 @@ function createFlipperModel (setRotationDegrees, onFlip) {
   }
 
   // Based on the animation target angle, are we showing the back side?
-  function isFlipped (angle) {
+  function isFlipped(angle) {
     return Math.round(angle / 180) % 2 !== 0
   }
 
   // Flips the flipper (if necessary).
   //
   // - `flipped` Set to true to display the backside or false for front side.
-  function flip (flipped) {
+  function flip(flipped) {
     const projection = getProjection()
     target = getTargetAngle(projection, flipped)
     updateAnimation()
@@ -194,14 +196,14 @@ function createFlipperModel (setRotationDegrees, onFlip) {
 
   // Based on the projected angle `projection` and desired `flipped` state,
   // determine the optimal angle to rotate the flipper to.
-  function getTargetAngle (projection, flipped) {
+  function getTargetAngle(projection, flipped) {
     const offset = flipped ? 180 : 0
     return Math.round((projection - offset - 1) / 360) * 360 + offset
   }
 
   // Queue a draw frame (for use when animation is not active).
   let pendingDraw = false
-  function queueDraw () {
+  function queueDraw() {
     if (pendingDraw) return
     pendingDraw = true
     window.requestAnimationFrame(() => {
@@ -211,15 +213,15 @@ function createFlipperModel (setRotationDegrees, onFlip) {
   }
 
   return {
-    setFlipped (flipped) {
+    setFlipped(flipped) {
       flip(flipped)
     },
-    pointerDown () {
+    pointerDown() {
       pointerIsDown = true
       history.length = 0
       history.push({ time: Date.now(), current })
     },
-    pointerMove (delta) {
+    pointerMove(delta) {
       current += delta
       queueDraw()
 
@@ -229,7 +231,7 @@ function createFlipperModel (setRotationDegrees, onFlip) {
         history.shift()
       }
     },
-    pointerUp () {
+    pointerUp() {
       pointerIsDown = false
 
       // Set the rotation speed to the ending speed of dragging.
@@ -246,6 +248,6 @@ function createFlipperModel (setRotationDegrees, onFlip) {
         onFlip(!isFlipped(target))
       }
       updateAnimation()
-    }
+    },
   }
 }

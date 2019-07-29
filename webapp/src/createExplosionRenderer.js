@@ -1,10 +1,10 @@
-import {mat4} from 'gl-matrix'
+import { mat4 } from 'gl-matrix'
 // @ts-check
 
 /**
  * @param {HTMLCanvasElement} canvas
  */
-export function createExplosionRenderer (canvas) {
+export function createExplosionRenderer(canvas) {
   /** @type {WebGLRenderingContext} */
   const gl = canvas.getContext('webgl')
   if (!gl) {
@@ -67,13 +67,13 @@ export function createExplosionRenderer (canvas) {
     gl,
     'vertex shader',
     gl.VERTEX_SHADER,
-    vertexShaderCode
+    vertexShaderCode,
   )
   const fragmentShader = loadShader(
     gl,
     'fragment shader',
     gl.FRAGMENT_SHADER,
-    fragmentShaderCode
+    fragmentShaderCode,
   )
   const program = gl.createProgram()
   gl.attachShader(program, vertexShader)
@@ -81,7 +81,7 @@ export function createExplosionRenderer (canvas) {
   gl.linkProgram(program)
   if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
     throw new Error(
-      'Cannot link shader program: ' + gl.getProgramInfoLog(program)
+      'Cannot link shader program: ' + gl.getProgramInfoLog(program),
     )
   }
 
@@ -108,7 +108,7 @@ export function createExplosionRenderer (canvas) {
   const uModelViewMatrix = gl.getUniformLocation(program, 'uModelViewMatrix')
   const uTime = gl.getUniformLocation(program, 'uTime')
 
-  function createRenderer (size) {
+  function createRenderer(size) {
     const fieldOfView = Math.atan2(1, 1.61) * 2
     const projectionMatrix = mat4.create()
     mat4.perspective(projectionMatrix, fieldOfView, 1, 0.01, 999)
@@ -116,21 +116,21 @@ export function createExplosionRenderer (canvas) {
     mat4.fromTranslation(modelViewMatrix, [
       -size / 2,
       size / 2,
-      -size * 1.61 * 0.5
+      -size * 1.61 * 0.5,
     ])
     mat4.scale(modelViewMatrix, modelViewMatrix, [1, -1, 1])
 
     let batches = []
     let requested = false
 
-    function dispose () {
+    function dispose() {
       batches.forEach(b => b.dispose())
       batches = []
     }
 
     return { render, addBlocks, dispose }
 
-    function addBlocks (items) {
+    function addBlocks(items) {
       const locations = []
       const positions = []
       const colors = []
@@ -144,8 +144,9 @@ export function createExplosionRenderer (canvas) {
         const wY = ((y + 0.5) / size - 0.5) * 2
         const rSquared = wX ** 2 + wY ** 2 + 0.25
         const theta = Math.random() * Math.PI * 2
-        const vx = (wX * 16 * (1 - Math.random() * 0.2)) / rSquared + (Math.random() - 0.5)
-        const vy = (wY * 16 * (1 - Math.random() * 0.2)) / rSquared
+        const vx =
+          wX * 16 * (1 - Math.random() * 0.2) / rSquared + (Math.random() - 0.5)
+        const vy = wY * 16 * (1 - Math.random() * 0.2) / rSquared
         const vz = 8 / rSquared
         const rx = Math.cos(theta)
         const ry = Math.sin(theta)
@@ -165,7 +166,7 @@ export function createExplosionRenderer (canvas) {
       gl.bufferData(
         gl.ARRAY_BUFFER,
         new Float32Array(positions),
-        gl.STATIC_DRAW
+        gl.STATIC_DRAW,
       )
 
       const locationBuffer = gl.createBuffer()
@@ -173,7 +174,7 @@ export function createExplosionRenderer (canvas) {
       gl.bufferData(
         gl.ARRAY_BUFFER,
         new Float32Array(locations),
-        gl.STATIC_DRAW
+        gl.STATIC_DRAW,
       )
 
       const velocityBuffer = gl.createBuffer()
@@ -181,7 +182,7 @@ export function createExplosionRenderer (canvas) {
       gl.bufferData(
         gl.ARRAY_BUFFER,
         new Float32Array(velocities),
-        gl.STATIC_DRAW
+        gl.STATIC_DRAW,
       )
 
       const colorBuffer = gl.createBuffer()
@@ -193,7 +194,7 @@ export function createExplosionRenderer (canvas) {
       gl.bufferData(
         gl.ARRAY_BUFFER,
         new Float32Array(rotationAxes),
-        gl.STATIC_DRAW
+        gl.STATIC_DRAW,
       )
 
       const rotationSpeedBuffer = gl.createBuffer()
@@ -201,7 +202,7 @@ export function createExplosionRenderer (canvas) {
       gl.bufferData(
         gl.ARRAY_BUFFER,
         new Float32Array(rotationSpeeds),
-        gl.STATIC_DRAW
+        gl.STATIC_DRAW,
       )
 
       const batch = {
@@ -214,7 +215,7 @@ export function createExplosionRenderer (canvas) {
         rotationSpeedBuffer,
         vertices,
         done: false,
-        dispose () {
+        dispose() {
           if (batch.done) return
           batch.done = true
           gl.deleteBuffer(positionBuffer)
@@ -223,17 +224,17 @@ export function createExplosionRenderer (canvas) {
           gl.deleteBuffer(velocityBuffer)
           gl.deleteBuffer(rotationAxisBuffer)
           gl.deleteBuffer(rotationSpeedBuffer)
-        }
+        },
       }
       batches.unshift(batch)
     }
 
-    function nextFrame () {
+    function nextFrame() {
       requested = false
       render()
     }
 
-    function render () {
+    function render() {
       let shouldContinue = false
       gl.clearColor(0.0, 0.0, 0.0, 0.0)
       gl.clear(gl.COLOR_BUFFER_BIT)
@@ -243,9 +244,10 @@ export function createExplosionRenderer (canvas) {
         if (batch.done) continue
         const elapsed = (Date.now() - batch.start) / 1000
         const pt = elapsed * 2
-        const t = pt < 1 / Math.sqrt(3)
-          ? pt ** 3
-          : pt - 1 / Math.sqrt(3) + (1 / Math.sqrt(3)) ** 3
+        const t =
+          pt < 1 / Math.sqrt(3)
+            ? pt ** 3
+            : pt - 1 / Math.sqrt(3) + (1 / Math.sqrt(3)) ** 3
         gl.uniform1f(uTime, t)
         gl.bindBuffer(gl.ARRAY_BUFFER, batch.positionBuffer)
         gl.vertexAttribPointer(aVertexPosition, 2, gl.FLOAT, false, 0, 0)
@@ -281,7 +283,7 @@ export function createExplosionRenderer (canvas) {
   let currentRenderer = null
   let currentSize = null
   return {
-    setSize (size) {
+    setSize(size) {
       if (currentRenderer && size !== currentSize) {
         currentRenderer.dispose()
         currentRenderer = null
@@ -291,18 +293,18 @@ export function createExplosionRenderer (canvas) {
       }
       currentSize = size
     },
-    dispose () {
+    dispose() {
       if (currentRenderer) {
         currentRenderer.dispose()
         currentRenderer = null
       }
     },
-    addBlocks (blocks) {
+    addBlocks(blocks) {
       if (currentRenderer) {
         currentRenderer.addBlocks(blocks)
         currentRenderer.render()
       }
-    }
+    },
   }
 }
 
@@ -312,7 +314,7 @@ export function createExplosionRenderer (canvas) {
  * @param {number} type
  * @param {string} source
  */
-function loadShader (gl, name, type, source) {
+function loadShader(gl, name, type, source) {
   const shader = gl.createShader(type)
   gl.shaderSource(shader, source)
   gl.compileShader(shader)

@@ -3,7 +3,7 @@ import React from 'react'
 import { action } from '@storybook/addon-actions'
 import { storiesOf } from '@storybook/react'
 
-const Side = (props) => {
+const Side = props => {
   return (
     <div
       style={{
@@ -12,7 +12,7 @@ const Side = (props) => {
         right: 0,
         bottom: 0,
         left: 0,
-        background: props.background
+        background: props.background,
       }}
     >
       {props.children}
@@ -20,19 +20,21 @@ const Side = (props) => {
   )
 }
 
-const front = <Side background='#456789'>FRONT</Side>
-const back = <Side background='#987654'>BACK</Side>
+const front = <Side background="#456789">FRONT</Side>
+const back = <Side background="#987654">BACK</Side>
 
 class FlipperContainer extends React.Component {
   state = { flipped: false }
-  render () {
+  render() {
     return (
       <div>
         <p>
           <input
-            type='checkbox'
+            type="checkbox"
             checked={this.state.flipped}
-            onChange={({ target: { checked: flipped } }) => this.setState({ flipped })}
+            onChange={({ target: { checked: flipped } }) =>
+              this.setState({ flipped })
+            }
           />
           {' Flipped'}
         </p>
@@ -40,7 +42,7 @@ class FlipperContainer extends React.Component {
           front={front}
           back={back}
           flipped={this.state.flipped}
-          onFlip={(flipped) => {
+          onFlip={flipped => {
             this.setState({ flipped })
             this.props.onFlip(flipped)
           }}
@@ -50,7 +52,6 @@ class FlipperContainer extends React.Component {
   }
 }
 
-storiesOf('Flipper', module)
-  .add('flipper', () => (
-    <FlipperContainer onFlip={action('onFlip')} />
-  ))
+storiesOf('Flipper', module).add('flipper', () => (
+  <FlipperContainer onFlip={action('onFlip')} />
+))

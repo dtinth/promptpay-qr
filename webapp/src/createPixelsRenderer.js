@@ -1,10 +1,10 @@
-import { createExplosionRenderer } from './createExplosionRenderer';
+import { createExplosionRenderer } from './createExplosionRenderer'
 
 /**
  * Creates a fancy pixels renderer
  * @param {HTMLDivElement} el The element to render to
  */
-export default function createPixelsRenderer (el) {
+export default function createPixelsRenderer(el) {
   let width = 0
   let height = 0
 
@@ -21,7 +21,7 @@ export default function createPixelsRenderer (el) {
 
   let previousBlackPixels = {}
 
-  function initCanvas (w, h) {
+  function initCanvas(w, h) {
     width = w
     height = h
     if (!bgCanvas) {
@@ -40,7 +40,7 @@ export default function createPixelsRenderer (el) {
     explosion.setSize(w)
   }
 
-  function updateSprites (pixels) {
+  function updateSprites(pixels) {
     const blackPixels = {}
     const blocks = []
     for (const { x, y } of pixels) {
@@ -59,7 +59,7 @@ export default function createPixelsRenderer (el) {
     explosion.addBlocks(blocks)
   }
 
-  function draw (pixels) {
+  function draw(pixels) {
     const bgContext = bgCanvas.getContext('2d')
     bgContext.clearRect(0, 0, bgCanvas.width, bgCanvas.height)
     for (const { x, y } of pixels) {
@@ -68,18 +68,18 @@ export default function createPixelsRenderer (el) {
   }
 
   return {
-    update (w, h, pixels) {
+    update(w, h, pixels) {
       if (w !== width || h !== height) {
         initCanvas(w, h)
       }
       draw(pixels)
       updateSprites(pixels)
     },
-    dispose () {
+    dispose() {
       if (canvas) {
         canvas.remove()
         explosion.dispose()
       }
-    }
+    },
   }
 }
