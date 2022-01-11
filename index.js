@@ -5,7 +5,7 @@
  *
  * Refs:
  * - https://www.blognone.com/node/95133
- * - Ehttps://www.emvco.com/emv-technologies/qrcodes/
+ * - https://www.emvco.com/emv-technologies/qrcodes/
  *
  * @license MIT
  */
