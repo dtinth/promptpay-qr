@@ -88,6 +88,9 @@ Then QR code will be printed in the terminal.
 
 - [See code example](https://runkit.com/dtinth/promptpay-qr).
 
+- [API Reference](https://apiref.page/package/promptpay-qr).
+
+
 ```
 generatePayload(idOrPhoneNo, { amount })
 ```
