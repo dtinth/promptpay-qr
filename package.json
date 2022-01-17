@@ -37,5 +37,6 @@
   "bugs": {
     "url": "https://github.com/dtinth/promptpay-qr/issues"
   },
-  "homepage": "https://github.com/dtinth/promptpay-qr#readme"
+  "homepage": "https://github.com/dtinth/promptpay-qr#readme",
+  "docModel": "./promptpay-qr.api.json"
 }
