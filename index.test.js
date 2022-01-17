@@ -1,6 +1,13 @@
+// @ts-check
 const generatePayload = require('./')
 
 /* eslint-env jest */
+/**
+ * @param {string} name
+ * @param {string} id
+ * @param {generatePayload.Options} options
+ * @param {string} expected
+ */
 function testcase (name, id, options, expected) {
   test(`${name}: ${id} ${require('util').inspect(options)} => ${expected}`, () => {
     expect(generatePayload(id, options)).toBe(expected)

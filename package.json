@@ -6,9 +6,13 @@
   },
   "files": [
     "index.js",
-    "cli.js"
+    "index.d.ts",
+    "promptpay-qr.api.json",
+    "cli.js",
+    "api.d.ts"
   ],
   "devDependencies": {
+    "@microsoft/api-extractor": "^7.19.4",
     "jest": "^20.0.4",
     "standard": "^10.0.3"
   },
@@ -21,7 +25,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "lint": "standard index.js index.test.js"
+    "lint": "standard index.js index.test.js",
+    "prepare": "api-extractor run"
   },
   "author": "Thai Pangsakulyanont <org.yi.dttvb@gmail.com> (http://dt.in.th/)",
   "license": "MIT",
