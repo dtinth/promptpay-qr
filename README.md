@@ -97,6 +97,11 @@ generatePayload(idOrPhoneNo, { amount })
 
 Returns a string which should be rendered as a QR code.
 
+### API reference
+
+<https://apiref.page/package/promptpay-qr>
+
+[![API reference screenshot](https://ss.dt.in.th/api/screenshots/apiref-promptpay-qr.png)](https://apiref.page/package/promptpay-qr)
 
 ## References
 
