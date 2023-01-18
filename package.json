@@ -1,8 +1,8 @@
 {
   "dependencies": {
-    "crc": "^3.4.4",
-    "minimist": "^1.2.0",
-    "qrcode": "^0.9.0"
+    "crc": "^4.1.0",
+    "minimist": "^1.2.6",
+    "qrcode": "^1.5.0"
   },
   "files": [
     "index.js",
@@ -12,9 +12,9 @@
     "api.d.ts"
   ],
   "devDependencies": {
-    "@microsoft/api-extractor": "^7.19.4",
-    "jest": "^20.0.4",
-    "standard": "^10.0.3"
+    "@microsoft/api-extractor": "^7.20.0",
+    "jest": "^27.5.1",
+    "standard": "^16.0.4"
   },
   "name": "promptpay-qr",
   "bin": {
